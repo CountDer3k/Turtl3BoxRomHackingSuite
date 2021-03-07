@@ -1,4 +1,4 @@
-package a_starter;
+package t3_starter;
 
 import java.io.File;
 import java.io.RandomAccessFile;
@@ -29,7 +29,7 @@ public class LibHexEditor {
 				return true;
 			}
 			catch(Exception ex) {
-				printErr("FAILED!!! "+ex.toString());
+				printErr("setHexAtOffse: "+ex.toString());
 				return false;
 			}
 		}
@@ -51,7 +51,7 @@ public class LibHexEditor {
 				return byteArrayToInt(b);
 			}
 			catch(Exception ex) {
-				printErr("FAILED!!! "+ex.toString());
+				printErr("getHexAtOffset: "+ex.toString());
 				return -1;
 			}
 		}
@@ -75,8 +75,6 @@ public class LibHexEditor {
 				value = Integer.parseInt(temp);
 			}
 		}
-		
-		printErr(value);
 		return value;
 	}
 	

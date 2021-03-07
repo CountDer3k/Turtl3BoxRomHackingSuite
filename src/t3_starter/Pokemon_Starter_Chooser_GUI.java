@@ -1,4 +1,4 @@
-package a_starter;
+package t3_starter;
 
 import java.awt.*;
 import java.awt.event.*;

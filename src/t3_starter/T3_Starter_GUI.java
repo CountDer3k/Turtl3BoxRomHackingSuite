@@ -1,4 +1,4 @@
-package a_starter;
+package t3_starter;
 
 import java.awt.EventQueue;
 
@@ -26,7 +26,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 
-public class windowStarter {
+public class T3_Starter_GUI {
 
 	private JFrame frame;
 	private static File fileSelected = null;
@@ -45,7 +45,7 @@ public class windowStarter {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					windowStarter window = new windowStarter();
+					T3_Starter_GUI window = new T3_Starter_GUI();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -57,7 +57,7 @@ public class windowStarter {
 	/**
 	 * Create the application.
 	 */
-	public windowStarter() {
+	public T3_Starter_GUI() {
 		initialize();
 	}
 
@@ -66,6 +66,7 @@ public class windowStarter {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setTitle("Turtl3Box Presents: T3-Starter");
 		frame.setBounds(100, 100, 650, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
