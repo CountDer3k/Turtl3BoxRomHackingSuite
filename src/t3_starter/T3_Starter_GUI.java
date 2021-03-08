@@ -30,7 +30,7 @@ public class T3_Starter_GUI {
 
 	private JFrame frame;
 	private static File fileSelected = null;
-	private static JTextField textField;
+	private static JTextField txtBoxLevel;
 	private static JComboBox DropDownFirstPoke;
 	private static JComboBox DropDownSecondPoke;
 	private static JComboBox DropDownThirdPoke;
@@ -70,18 +70,8 @@ public class T3_Starter_GUI {
 		frame.setBounds(100, 100, 650, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JMenuBar menuBar = new JMenuBar();
-		frame.setJMenuBar(menuBar);
+		setMenu();
 		
-		JMenu mnNewMenu = new JMenu("File");
-		menuBar.add(mnNewMenu);
-		
-		JMenuItem menuOpen = new JMenuItem("Open");
-		menuOpen.addActionListener((ActionListener)EventHandler.create(ActionListener.class, this, "openFile"));
-		mnNewMenu.add(menuOpen);
-		
-		JMenuItem mntmNewMenuItem_3 = new JMenuItem("New menu item");
-		mnNewMenu.add(mntmNewMenuItem_3);
 		frame.getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("33px"),
 				ColumnSpec.decode("145px"),
@@ -122,13 +112,31 @@ public class T3_Starter_GUI {
 		JLabel lblLevel = new JLabel("Level: ");
 		frame.getContentPane().add(lblLevel, "2, 10, right, default");
 		
-		textField = new JTextField();
-		frame.getContentPane().add(textField, "3, 10, fill, default");
-		textField.setColumns(10);
+		txtBoxLevel = new JTextField();
+		frame.getContentPane().add(txtBoxLevel, "3, 10, fill, default");
+		txtBoxLevel.setColumns(10);
 		
 		JComboBox DropDownItemPlayer = new JComboBox();
 		frame.getContentPane().add(DropDownItemPlayer, "5, 10, fill, default");
 
+	}
+	
+	/* Helper method to initialize.
+	 * Sets up the menu items */
+	private void setMenu() {
+		JMenuBar menuBar = new JMenuBar();
+		frame.setJMenuBar(menuBar);
+		
+		JMenu mnNewMenu = new JMenu("File");
+		menuBar.add(mnNewMenu);
+		
+		JMenuItem menuOpenROM = new JMenuItem("Open ROM");
+		menuOpenROM.addActionListener((ActionListener)EventHandler.create(ActionListener.class, this, "openFile"));
+		mnNewMenu.add(menuOpenROM);
+		
+		JMenuItem menuSaveROM = new JMenuItem("Save ROM");
+		menuSaveROM.addActionListener((ActionListener)EventHandler.create(ActionListener.class, this, "saveFile"));
+		mnNewMenu.add(menuSaveROM);
 	}
 	
 	
@@ -155,20 +163,31 @@ public class T3_Starter_GUI {
 			JOptionPane.showMessageDialog(frame, this, s, JOptionPane.OK_OPTION);
 		}
 		fileSelected =sf;
-		
+	}
+	
+	public void saveFile() {
+		// Save 1st Pokemon
+		libHex.setHexAtOffset(0x00169BB5, DropDownFirstPoke.getSelectedIndex());
+		// Save 2nd Pokemon
+		libHex.setHexAtOffset(0x00169D82, DropDownSecondPoke.getSelectedIndex());
+		// Save 3rd Pokemon
+		libHex.setHexAtOffset(0x00169DB8, DropDownThirdPoke.getSelectedIndex());
+		// Save Level
+		libHex.setHexAtOffset(0x00169C8E, Integer.parseInt(txtBoxLevel.getText()));
+		// Save Held Item
 	}
 	
 	private static void setComboBoxes() {
 		// Set selected value to value stored in ROM
 		int num = LibHexEditor.getHexAtOffset(0x00169BB5, 2);		
 		DropDownFirstPoke.setSelectedIndex(num);
-		 num = LibHexEditor.getHexAtOffset(0x00169D82, 2);		
+		num = LibHexEditor.getHexAtOffset(0x00169D82, 2);		
 		DropDownSecondPoke.setSelectedIndex(num);
-		 num = LibHexEditor.getHexAtOffset(0x00169DB8, 2);		
+		num = LibHexEditor.getHexAtOffset(0x00169DB8, 2);		
 		DropDownThirdPoke.setSelectedIndex(num);
 		
 		// Set Level from ROM
 		num = LibHexEditor.getHexAtOffset(0x00169C8E, 1);
-		textField.setText(num+"");
+		txtBoxLevel.setText(num+"");
 	}
 }
