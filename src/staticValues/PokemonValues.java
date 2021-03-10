@@ -1,4 +1,4 @@
-package t3_starter;
+package staticValues;
 
 public class PokemonValues {
 
@@ -23,5 +23,13 @@ public class PokemonValues {
 				};
 		
 		return GenI;
+	}
+	
+	
+	//-----------------------
+	// Game Codes
+	//-----------------------
+	public String[] getGameCode() {
+		return null;
 	}
 }
